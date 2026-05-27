@@ -1,166 +1,343 @@
 # FeatureForge Studio
 
-FeatureForge Studio is an interactive EDA and feature-engineering workspace for machine learning preprocessing. It gives you a Streamlit app for visual workflows and an importable Python library for scripts, notebooks, and reusable preprocessing pipelines.
+<div align="center">
 
-> Install name: `featureforge-studio`  
-> Import name: `featureforge`
+### Interactive Feature Engineering & Exploratory Data Analysis Platform
 
-## Highlights
+FeatureForge Studio simplifies machine learning preprocessing workflows through interactive EDA, configurable feature engineering, preprocessing pipelines, and reproducible dataset transformations.
 
-- Upload CSV datasets and inspect schema, missing values, duplicates, memory usage, and column types.
-- Generate smart data-quality warnings for missingness, skew, high cardinality, duplicate rows, and likely ID columns.
-- Explore data with interactive Plotly charts: histograms, boxplots, count plots, scatter plots, correlation heatmaps, and missing-value views.
-- Queue preprocessing steps for imputation, scaling, encoding, and outlier handling.
-- Export cleaned datasets, transformation config JSON, preprocessing code, and transformation reports.
-- Use the same backend logic from Python via `featureforge`.
+</div>
 
-## Installation
+---
 
-Install from a local wheel:
+# Overview
 
-```bash
-pip install dist/featureforge_studio-0.1.0-py3-none-any.whl
+FeatureForge Studio is an interactive machine learning preprocessing platform designed to streamline the most repetitive and time-consuming parts of the ML workflow:
+
+* Exploratory Data Analysis (EDA)
+* Missing value handling
+* Feature scaling
+* Encoding
+* Outlier treatment
+* Transformation tracking
+* Preprocessing pipeline generation
+* Clean dataset export
+
+The platform provides a guided interface for analyzing datasets, applying transformations interactively, and exporting reproducible preprocessing workflows.
+
+---
+
+# Problem Statement
+
+Feature engineering and preprocessing are often:
+
+* repetitive
+* difficult for beginners
+* scattered across notebooks
+* hard to reproduce
+* time-consuming
+
+Most preprocessing workflows require manually writing transformation code repeatedly for every project.
+
+FeatureForge Studio aims to centralize and simplify this workflow through an interactive preprocessing environment built specifically for machine learning workflows.
+
+---
+
+# Key Features
+
+## Dataset Upload & Profiling
+
+* Upload CSV datasets
+* Dataset preview and schema inspection
+* Missing value analysis
+* Statistical summaries
+* Data type analysis
+* Duplicate detection
+* Dataset health diagnostics
+* Smart preprocessing warnings
+
+---
+
+## Interactive EDA Dashboard
+
+### Univariate Analysis
+
+* Histograms
+* KDE plots
+* Boxplots
+* Countplots
+
+### Multivariate Analysis
+
+* Scatter plots
+* Feature comparisons
+* Relationship analysis
+
+### Correlation Analysis
+
+* Correlation heatmaps
+* Correlation matrix visualization
+
+### Integrated Profiling
+
+FeatureForge Studio integrates:
+
+* ydata-profiling
+* Plotly
+* Streamlit
+
+for advanced dataset diagnostics and interactive visualizations.
+
+---
+
+## Feature Transformation Engine
+
+### Missing Value Handling
+
+* Mean imputation
+* Median imputation
+* Mode imputation
+* Constant-value filling
+
+### Feature Scaling
+
+* StandardScaler
+* MinMaxScaler
+* RobustScaler
+
+### Encoding
+
+* OneHotEncoding
+* LabelEncoding
+* OrdinalEncoding
+
+### Outlier Handling
+
+* IQR filtering
+* Z-score filtering
+
+---
+
+## Dynamic Pipeline Generation
+
+FeatureForge Studio dynamically builds preprocessing pipelines using:
+
+* sklearn Pipelines
+* ColumnTransformers
+
+This enables:
+
+* reproducibility
+* modular preprocessing
+* clean transformation workflows
+* exportable ML pipelines
+
+---
+
+## Export System
+
+Export:
+
+* Cleaned datasets
+* Preprocessing configurations
+* Transformation logs
+* Reproducible preprocessing code
+
+---
+
+# System Architecture
+
+```text
+Dataset Upload
+      ↓
+Dataset Profiling Engine
+      ↓
+Interactive EDA Layer
+      ↓
+Transformation Manager
+      ↓
+Pipeline Builder
+      ↓
+Processed Dataset
+      ↓
+Export Engine
 ```
 
-For local development:
+---
+
+# Tech Stack
+
+| Category                  | Technology      |
+| ------------------------- | --------------- |
+| Frontend/UI               | Streamlit       |
+| Data Processing           | pandas          |
+| Numerical Operations      | NumPy           |
+| Machine Learning          | scikit-learn    |
+| Interactive Visualization | Plotly          |
+| Profiling Engine          | ydata-profiling |
+| Statistical Utilities     | scipy           |
+| Packaging                 | setuptools      |
+| Version Control           | Git + GitHub    |
+
+---
+
+# Project Structure
+
+```text
+featureforge-studio/
+│
+├── featureforge/
+│   ├── core/
+│   ├── pages/
+│   ├── transformers/
+│   ├── utils/
+│   ├── visualization/
+│   └── configs/
+│
+├── notebooks/
+├── tests/
+├── README.md
+├── pyproject.toml
+└── .gitignore
+```
+
+---
+
+# Installation
+
+## Clone Repository
 
 ```bash
-git clone https://github.com/aarush07/featureforge.git
-cd featureforge/featureforge
+git clone https://github.com/GolDLance07/featureforge-studio.git
+cd featureforge-studio
+```
+
+---
+
+## Create Virtual Environment
+
+### Linux / macOS
+
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -e .[dev]
 ```
 
-After publishing to PyPI:
+### Windows
 
 ```bash
-pip install featureforge-studio
+python -m venv .venv
+.venv\Scripts\activate
 ```
 
-## Run The App
+---
 
-From an installed package:
+## Install Dependencies
 
 ```bash
-featureforge-app
+pip install -r requirements.txt
 ```
 
-From the repository:
+Or:
 
 ```bash
-cd featureforge
+pip install -e .
+```
+
+---
+
+# Running the Application
+
+```bash
 streamlit run app.py
 ```
 
-If the default Streamlit port is busy:
+---
 
-```bash
-streamlit run app.py --server.port 8502
-```
+# Current Development Status
 
-## Library Usage
+## Completed
 
-```python
-import pandas as pd
-from featureforge import ProfilingEngine, TransformationManager
+* Project architecture
+* Python packaging setup
+* Modular preprocessing architecture
+* Dataset upload workflow
+* Environment setup
+* GitHub integration
+* Dynamic transformation structure
 
-df = pd.DataFrame(
-    {
-        "age": [21, None, 35],
-        "city": ["Pune", "Delhi", None],
-        "salary": [40000, 52000, 61000],
-    }
-)
+---
 
-profile = ProfilingEngine().generate_summary(df)
+## In Progress
 
-steps = [
-    {
-        "id": "missing_values_1",
-        "type": "missing_values",
-        "method": "median",
-        "columns": ["age"],
-        "params": {},
-        "label": "Missing Values - median",
-    },
-    {
-        "id": "encoding_2",
-        "type": "encoding",
-        "method": "onehot",
-        "columns": ["city"],
-        "params": {"handle_unknown": "ignore"},
-        "label": "Encoding - onehot",
-    },
-]
+* Interactive EDA system
+* Transformation engine
+* Pipeline generation
+* Export workflows
 
-processed_df, metadata = TransformationManager().apply_steps(df, steps)
-```
+---
 
-## Core API
+## Planned Features
 
-- `DatasetManager`: CSV loading, column cleanup, basic validation.
-- `ProfilingEngine`: dataset summaries, missing-value tables, type detection, smart warnings, optional ydata-profiling reports.
-- `EDAEngine`: Plotly figure generation from declarative chart configs.
-- `TransformationManager`: validates and applies transformation queues.
-- `PipelineBuilder`: builds sklearn preprocessing pipelines from transformation config.
-- `CodeGenerator`: exports standalone sklearn preprocessing code.
-- `ExportEngine`: creates CSV, JSON, Python, and Markdown export payloads.
+### Feature Construction
 
-## Supported Transformations
+* Polynomial features
+* Interaction features
+* Datetime decomposition
 
-| Area | Methods |
-| --- | --- |
-| Missing values | mean, median, mode, constant, drop rows |
-| Scaling | StandardScaler, MinMaxScaler, RobustScaler |
-| Encoding | OneHotEncoder, OrdinalEncoder, label-style category codes |
-| Outliers | IQR filtering, Z-score filtering |
+### Feature Selection
 
-## Build A Distributable Package
+* Correlation filtering
+* Variance thresholding
+* Recursive feature elimination
 
-```bash
-python -m pip install build twine
-python -m build
-```
+### Feature Extraction
 
-This creates:
+* PCA
+* Dimensionality reduction
 
-```text
-dist/featureforge_studio-0.1.0-py3-none-any.whl
-dist/featureforge_studio-0.1.0.tar.gz
-```
+### Smart Recommendations
 
-## Publish To PyPI
+* Automatic preprocessing suggestions
+* Intelligent transformation hints
+* Dataset health recommendations
 
-First test the package on TestPyPI:
+---
 
-```bash
-twine upload --repository testpypi dist/*
-```
+# Why This Project Matters
 
-Then publish to PyPI:
+FeatureForge Studio is designed not only as a preprocessing utility, but also as a learning-oriented ML engineering platform.
 
-```bash
-twine upload dist/*
-```
+The project focuses on:
 
-Note: the PyPI name `featureforge` is already taken by another project, so this package uses the distribution name `featureforge-studio` while keeping the clean import name `featureforge`.
+* reproducible preprocessing
+* scalable ML workflows
+* modular feature engineering
+* beginner-friendly machine learning tooling
+* interactive preprocessing systems
 
-## Development
+---
 
-Run tests:
+# Future Vision
 
-```bash
-pytest -q
-```
+FeatureForge Studio is planned to evolve into:
 
-Rebuild after metadata changes:
+* an intelligent preprocessing assistant
+* an AutoML-ready preprocessing system
+* a configurable ML workflow platform
+* a no-code preprocessing environment for machine learning pipelines
 
-```bash
-rm -rf dist build *.egg-info
-python -m build
-```
+---
 
-## License
+# Author
 
-MIT License. See [LICENSE](LICENSE).
+### Aarush
+
+Machine Learning • Data Science • Software Engineering
+
+---
+
+# License
+
+This project is licensed under the MIT License.
+
