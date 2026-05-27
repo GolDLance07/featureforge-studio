@@ -58,27 +58,5 @@ Issues = "https://github.com/aarush07/featureforge/issues"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
-[tool.setuptools]
-packages = [
-    "featureforge",
-    "featureforge.configs",
-    "featureforge.core",
-    "featureforge.pages",
-    "featureforge.transformers",
-    "featureforge.utils",
-    "featureforge.visualization",
-]
-
-[tool.setuptools.package-dir]
-featureforge = "."
-"featureforge.configs" = "configs"
-"featureforge.core" = "core"
-"featureforge.pages" = "pages"
-"featureforge.transformers" = "transformers"
-"featureforge.utils" = "utils"
-"featureforge.visualization" = "visualization"
-
-[tool.setuptools.package-data]
-featureforge = ["app.py"]
-"featureforge.configs" = ["*.json"]
-"featureforge.pages" = ["*.py"]
+[tool.setuptools.packages.find]
+include = ["featureforge*"]
