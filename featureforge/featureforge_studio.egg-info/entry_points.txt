@@ -1,0 +1,2 @@
+[console_scripts]
+featureforge-app = featureforge.cli:main

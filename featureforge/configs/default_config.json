@@ -1,0 +1,12 @@
+{
+  "app": {
+    "name": "FeatureForge",
+    "max_preview_rows": 100,
+    "default_sample_size": 2000
+  },
+  "profiling": {
+    "high_missing_threshold": 30,
+    "high_skew_threshold": 1,
+    "high_cardinality_min": 50
+  }
+}

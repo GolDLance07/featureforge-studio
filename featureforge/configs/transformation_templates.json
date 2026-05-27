@@ -1,0 +1,14 @@
+{
+  "missing_values": {
+    "methods": ["mean", "median", "mode", "constant", "drop_rows"]
+  },
+  "scaling": {
+    "methods": ["standard", "minmax", "robust"]
+  },
+  "encoding": {
+    "methods": ["onehot", "ordinal", "label"]
+  },
+  "outliers": {
+    "methods": ["iqr_filter", "zscore_filter"]
+  }
+}
